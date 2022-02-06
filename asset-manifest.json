@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/vacancies/static/css/main.063a0804.css",
+    "main.js": "/vacancies/static/js/main.2a78ee4b.js",
+    "static/media/logo.svg": "/vacancies/static/media/logo.ca7af5e53d13b4e580a1019746a88524.svg",
+    "index.html": "/vacancies/index.html",
+    "static/media/filter.svg": "/vacancies/static/media/filter.18ba11c610fd3e7e6cecc665e92e566c.svg",
+    "main.063a0804.css.map": "/vacancies/static/css/main.063a0804.css.map",
+    "main.2a78ee4b.js.map": "/vacancies/static/js/main.2a78ee4b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.063a0804.css",
+    "static/js/main.2a78ee4b.js"
+  ]
+}
