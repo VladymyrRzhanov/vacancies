@@ -7,7 +7,7 @@ const VacanciesList = ({ vacancies }) => {
     <List>
       {vacancies.map(({ id, ...items }) => (
         <Item key={id}>
-          <VacancieCard items={items} />
+          <VacancieCard items={items} cardId={id} />
         </Item>
       ))}
     </List>

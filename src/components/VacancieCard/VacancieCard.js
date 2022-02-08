@@ -1,7 +1,14 @@
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getDislikeCards } from '../../redux/dislikeCards/dislikeCards-selectors';
+import { getApplyCards } from '../../redux/applyCards/applyCards-selectors';
 import {
   Card,
+  Blind,
   PosterImg,
   Features,
+  ApplyStatus,
+  DislikeStatus,
   Status,
   Position,
   PositionName,
@@ -17,18 +24,19 @@ import {
   Container,
   Public,
   ButtonsContainer,
-  Button,
-  ButtonStar,
-  ApplyButton,
-  ApplyText,
 } from './styles';
-import { ReactComponent as Apply } from '../../assets/images/apply.svg';
-import { ReactComponent as Star } from '../../assets/images/star.svg';
-import { ReactComponent as Dislike } from '../../assets/images/dislike.svg';
+import BtnFav from '../BtnFav';
+import BtnDislike from '../BtnDislike';
+import BtnApply from '../BtnApply';
 import nologo from '../../assets/images/nologo.jpg';
 import ProfPhoto from '../../assets/images/ProfPhoto.jpg';
 
-const VacancieCard = ({ items }) => {
+const VacancieCard = ({ cardId, items }) => {
+  const [checked, setChecked] = useState(false);
+  const [apply, setApply] = useState(false);
+  const [publication, setPublication] = useState(false);
+  const isChecked = useSelector(getDislikeCards);
+  const isApply = useSelector(getApplyCards);
   const { name, employer, salary, area, schedule, published_at } = items;
   const { name: company_name, logo_urls } = employer;
   const { name: area_name } = area;
@@ -36,6 +44,20 @@ const VacancieCard = ({ items }) => {
   const minPayment = salary?.from === (null || undefined) ? '' : salary.from;
   const maxPayment = salary?.to === (null || undefined) ? '' : salary.to;
   const logo = logo_urls !== null ? `${logo_urls[240]}` : nologo;
+
+  useEffect(() => {
+    if (isChecked.includes(cardId)) {
+      return setChecked(true);
+    }
+    return setChecked(false);
+  }, [cardId, isChecked]);
+
+  useEffect(() => {
+    if (isApply.includes(cardId)) {
+      return setApply(true);
+    }
+    return setApply(false);
+  }, [cardId, isApply]);
 
   const payment = () => {
     if (salary === null) {
@@ -67,19 +89,34 @@ const VacancieCard = ({ items }) => {
     return five;
   };
 
-  const publicTime = () => {
+  const diffTime = () => {
     const dateNow = Date.parse(new Date());
     const time = dateNow - Date.parse(published_at);
     const minutes = Math.floor((time / 1000 / 60) % 60);
     const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
     const days = Math.floor(time / (1000 * 60 * 60 * 24));
-    const daysText = `${days} ` + getNoun(days, 'день', 'дня', 'дней');
-    const hoursText = `${hours} ` + getNoun(hours, 'час', 'часа', 'часов');
+    return { days, hours, minutes };
+  };
+
+  useEffect(() => {
+    const time = diffTime();
+    if (time.days > 5) {
+      return;
+    }
+    setPublication(!publication);
+  }, []);
+
+  const publicTime = () => {
+    const time = diffTime();
+    const daysText =
+      `${time.days} ` + getNoun(time.days, 'день', 'дня', 'дней');
+    const hoursText =
+      `${time.hours} ` + getNoun(time.hours, 'час', 'часа', 'часов');
     const minutesText =
-      `${minutes} ` + getNoun(minutes, 'минута', 'минуты', 'минут');
-    if (days === 0) {
+      `${time.minutes} ` + getNoun(time.minutes, 'минута', 'минуты', 'минут');
+    if (time.days === 0) {
       return `${hoursText} ${minutesText} назад`;
-    } else if (hours === 0) {
+    } else if (time.hours === 0) {
       return `${daysText} ${minutesText} назад`;
     } else {
       return `${daysText} ${hoursText} ${minutesText} назад`;
@@ -88,47 +125,41 @@ const VacancieCard = ({ items }) => {
 
   return (
     <Card>
+      {(checked || apply) && <Blind />}
       <PosterImg src={ProfPhoto} alt={'ProfPhoto'} />
       <Features>
-        <Status>Новая</Status>
-        <div>
-          <Position>
-            <PositionName>{name}</PositionName>
-            <LogoContainer>
-              <LogoImg src={logo} alt={company_name} />
-            </LogoContainer>
-          </Position>
-          {salary && (
-            <Salary>
-              {payment()}
-              <span>&#8372;</span>
-            </Salary>
-          )}
+        {checked && <DislikeStatus>Неинтересная</DislikeStatus>}
+        {apply && <ApplyStatus>Вы откликнулись</ApplyStatus>}
+        {publication && !checked && !apply && <Status>Новая</Status>}
+        <Position>
+          <PositionName>{name}</PositionName>
+          <LogoContainer>
+            <LogoImg src={logo} alt={company_name} />
+          </LogoContainer>
+        </Position>
+        {salary && (
+          <Salary>
+            {payment()}
+            <span>&#8372;</span>
+          </Salary>
+        )}
 
-          <PlaceContainer>
-            <CompanyName>{company_name}</CompanyName>
-            <AreaName>{area_name}</AreaName>
-          </PlaceContainer>
-          <BenefitsList>
-            <BenefitsItem>
-              <BenefitsText>{schedule_name}</BenefitsText>
-            </BenefitsItem>
-          </BenefitsList>
-        </div>
+        <PlaceContainer>
+          <CompanyName>{company_name}</CompanyName>
+          <AreaName>{area_name}</AreaName>
+        </PlaceContainer>
+        <BenefitsList>
+          <BenefitsItem>
+            <BenefitsText>{schedule_name}</BenefitsText>
+          </BenefitsItem>
+        </BenefitsList>
         <Container>
           <Public>{publicTime()}</Public>
           <ButtonsContainer>
-            <ApplyButton>
-              <Apply />
-              <ApplyText>Откликнуться</ApplyText>
-            </ApplyButton>
+            {!apply && !checked && <BtnApply cardId={cardId} />}
             <div>
-              <ButtonStar>
-                <Star />
-              </ButtonStar>
-              <Button>
-                <Dislike />
-              </Button>
+              <BtnFav cardId={cardId} />
+              <BtnDislike cardId={cardId} />
             </div>
           </ButtonsContainer>
         </Container>

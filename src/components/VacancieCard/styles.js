@@ -1,6 +1,16 @@
 import styled from 'styled-components';
 
+export const Blind = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: white;
+  height: 100%;
+  opacity: 0.5;
+`;
+
 export const Card = styled.div`
+  position: relative;
   width: 340px;
   min-height: 330px;
   overflow: hidden;
@@ -36,6 +46,16 @@ export const Status = styled.span`
   color: #bc0002;
   background: #ffe9e9;
   border-radius: 5px;
+`;
+
+export const DislikeStatus = styled(Status)`
+  background: #c8d1d6;
+  color: #303a3e;
+`;
+
+export const ApplyStatus = styled(Status)`
+  background: #d5ffe6;
+  color: #00702d;
 `;
 
 export const Position = styled.div`
@@ -141,32 +161,4 @@ export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
-
-export const Button = styled.button`
-  padding: 10px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-`;
-export const ApplyButton = styled(Button)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 0;
-  @media screen and (min-width: 1300px) {
-    margin-right: 20px;
-  }
-`;
-
-export const ButtonStar = styled(Button)`
-  margin-right: 10px;
-`;
-
-export const ApplyText = styled.span`
-  margin-left: 10px;
-  font-family: 'Header Text';
-  font-size: 16px;
-  line-height: 1.25;
-  color: #ff5252;
 `;
