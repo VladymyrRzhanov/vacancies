@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/vacancies/static/css/main.57b830e7.css",
-    "main.js": "/vacancies/static/js/main.e02bba88.js",
+    "main.js": "/vacancies/static/js/main.435f98f1.js",
     "static/media/ProfPhoto.jpg": "/vacancies/static/media/ProfPhoto.efef7d568ac2d121db6f.jpg",
     "static/media/Graphik-Bold-Web.woff2": "/vacancies/static/media/Graphik-Bold-Web.a814eae41d5b090ec309.woff2",
     "static/media/Graphik-Regular-Web.woff2": "/vacancies/static/media/Graphik-Regular-Web.14b6085903d31b2fe601.woff2",
     "static/media/nologo.jpg": "/vacancies/static/media/nologo.a61d90464a695aebad8d.jpg",
-    "static/media/dislike.svg": "/vacancies/static/media/dislike.0d50fa0fb31081fefbc0e4c8b877297a.svg",
     "static/media/logo.svg": "/vacancies/static/media/logo.ca7af5e53d13b4e580a1019746a88524.svg",
     "static/media/apply.svg": "/vacancies/static/media/apply.20e6bd1d6fa3ad30fb0f7638e83bc2b8.svg",
-    "static/media/star.svg": "/vacancies/static/media/star.93d76161641337227e1a0526a44e275c.svg",
+    "static/media/dislike2.svg": "/vacancies/static/media/dislike2.f8755c0750f3c7f810bdfa093a519717.svg",
     "index.html": "/vacancies/index.html",
+    "static/media/star.svg": "/vacancies/static/media/star.1dd245dfa265a3e4ea887e5e5b1153f0.svg",
     "static/media/filter.svg": "/vacancies/static/media/filter.18ba11c610fd3e7e6cecc665e92e566c.svg",
     "main.57b830e7.css.map": "/vacancies/static/css/main.57b830e7.css.map",
-    "main.e02bba88.js.map": "/vacancies/static/js/main.e02bba88.js.map"
+    "main.435f98f1.js.map": "/vacancies/static/js/main.435f98f1.js.map"
   },
   "entrypoints": [
     "static/css/main.57b830e7.css",
-    "static/js/main.e02bba88.js"
+    "static/js/main.435f98f1.js"
   ]
 }
