@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as dislikeCardsActions from '../../redux/dislikeCards/dislikeCards-actions';
 import { getDislikeCards } from '../../redux/dislikeCards/dislikeCards-selectors';
 import { ButtonDislike, DislikeBtn, DislikeBtnChecked } from './styles';
@@ -32,6 +33,10 @@ const BtnDislike = ({ cardId }) => {
       checked={checked}
     />
   );
+};
+
+BtnDislike.propTypes = {
+  cardId: PropTypes.string.isRequired,
 };
 
 export default BtnDislike;

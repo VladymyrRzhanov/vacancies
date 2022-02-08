@@ -5,6 +5,7 @@ export const List = styled.ul`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 30px;
   @media screen and (min-width: 760px) and (max-width: 1300px) {
     display: flex;
     flex-direction: row;

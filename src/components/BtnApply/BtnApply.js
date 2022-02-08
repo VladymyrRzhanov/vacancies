@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as applyCardsActions from '../../redux/applyCards/applyCards-actions';
 import { ReactComponent as Apply } from '../../assets/images/apply.svg';
 import { ButtonApply, ApplyText } from './styles';
@@ -16,6 +17,10 @@ const BtnFav = ({ cardId }) => {
       <ApplyText>Откликнуться</ApplyText>
     </ButtonApply>
   );
+};
+
+BtnFav.propTypes = {
+  cardId: PropTypes.string.isRequired,
 };
 
 export default BtnFav;

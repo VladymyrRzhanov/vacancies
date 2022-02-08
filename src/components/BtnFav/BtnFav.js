@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import * as favCardsActions from '../../redux/favCards/favCards-actions';
 import { getFavCards } from '../../redux/favCards/favCards-selectors';
@@ -32,6 +33,10 @@ const BtnFav = ({ cardId }) => {
       checked={checked}
     />
   );
+};
+
+BtnFav.propTypes = {
+  cardId: PropTypes.string.isRequired,
 };
 
 export default BtnFav;

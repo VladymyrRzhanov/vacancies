@@ -10,12 +10,10 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-// import authUserReducer from "./authUser/authUser-reducer";
 import favCardsReducer from './favCards/favCards-reducer';
 import applyCardsReducer from './applyCards/applyCards-reducer';
 import dislikeCardsReducer from './dislikeCards/dislikeCards-reducer';
-// import filmsPageReducer from "./filmsPage/filmsPage-reducer";
-// import viewedFilmsReducer from './viewFilms/viewedFilms-reducer';
+import vacanciesPageReducer from './vacanciesPage/vacanciesPage-reducer';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -28,33 +26,27 @@ const middleware = [
 const favCardsPersistConfig = {
   key: 'favCards',
   storage,
-  // whitelist: ['user']
 };
 
 const dislikeCardsPersistConfig = {
   key: 'dislikeCards',
   storage,
-  // whitelist: ['user']
 };
 
 const applyCardsPersistConfig = {
   key: 'applyCards',
   storage,
-  // whitelist: ['user']
 };
 
 export const store = configureStore({
   reducer: {
-    // auth: authUserReducer,
-    // auth: persistReducer(authPersistConfig, authUserReducer),
-    // filmsPage: filmsPageReducer,
-    // favFilms: favFilmsReducer,
     applyCards: persistReducer(applyCardsPersistConfig, applyCardsReducer),
     favCards: persistReducer(favCardsPersistConfig, favCardsReducer),
     dislikeCards: persistReducer(
       dislikeCardsPersistConfig,
       dislikeCardsReducer,
     ),
+    vacanciesPage: vacanciesPageReducer,
   },
   middleware,
   //   devTools: process.env.NODE_ENV === 'development',

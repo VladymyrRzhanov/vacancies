@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { getDislikeCards } from '../../redux/dislikeCards/dislikeCards-selectors';
 import { getApplyCards } from '../../redux/applyCards/applyCards-selectors';
@@ -166,6 +167,30 @@ const VacancieCard = ({ cardId, items }) => {
       </Features>
     </Card>
   );
+};
+
+VacancieCard.propTypes = {
+  cardId: PropTypes.string.isRequired,
+  items: PropTypes.shape({
+    name: PropTypes.string,
+    employer: PropTypes.shape({
+      name: PropTypes.string,
+      logo_urls: PropTypes.shape({
+        240: PropTypes.string,
+      }),
+    }),
+    salary: PropTypes.shape({
+      from: PropTypes.number,
+      to: PropTypes.number,
+    }),
+    area: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+    schedule: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+    published_at: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default VacancieCard;
