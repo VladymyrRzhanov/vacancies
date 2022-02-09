@@ -28,7 +28,7 @@ const BtnFav = ({ onChange, cardId }) => {
     };
   };
 
-  const validators = [fileSizeLimit(209)];
+  const validators = [fileSizeLimit(2097152)];
   const errors = {
     errors: {
       dimensions:
