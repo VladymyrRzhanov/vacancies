@@ -20,3 +20,12 @@ export const ApplyText = styled.span`
   line-height: 1.25;
   color: #ff5252;
 `;
+
+export const Uploader = styled.div`
+  & .uploadcare--widget__button_type_open {
+    display: none;
+  }
+  & .uploadcare--widget__button {
+    display: none;
+  }
+`;

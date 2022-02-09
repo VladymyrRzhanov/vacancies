@@ -25,16 +25,23 @@ import {
   Container,
   Public,
   ButtonsContainer,
+  ApplyContainer,
+  SuccessApply,
+  ErrorContainer,
+  ErrorMessage,
 } from './styles';
 import BtnFav from '../BtnFav';
 import BtnDislike from '../BtnDislike';
 import BtnApply from '../BtnApply';
 import nologo from '../../assets/images/nologo.jpg';
+import { ReactComponent as ErrorIcon } from '../../assets/images/errorIcon.svg';
 import ProfPhoto from '../../assets/images/ProfPhoto.jpg';
 
 const VacancieCard = ({ cardId, items }) => {
   const [checked, setChecked] = useState(false);
+  const [error, setError] = useState(false);
   const [apply, setApply] = useState(false);
+  const [link, setLink] = useState('');
   const [publication, setPublication] = useState(false);
   const isChecked = useSelector(getDislikeCards);
   const isApply = useSelector(getApplyCards);
@@ -46,6 +53,10 @@ const VacancieCard = ({ cardId, items }) => {
   const maxPayment = salary?.to === (null || undefined) ? '' : salary.to;
   const logo = logo_urls !== null ? `${logo_urls[240]}` : nologo;
 
+  const catchError = () => {
+    setError(!error);
+  };
+
   useEffect(() => {
     if (isChecked.includes(cardId)) {
       return setChecked(true);
@@ -54,7 +65,7 @@ const VacancieCard = ({ cardId, items }) => {
   }, [cardId, isChecked]);
 
   useEffect(() => {
-    if (isApply.includes(cardId)) {
+    if (isApply.some(vacancie => vacancie.id === cardId)) {
       return setApply(true);
     }
     return setApply(false);
@@ -107,6 +118,15 @@ const VacancieCard = ({ cardId, items }) => {
     setPublication(!publication);
   }, []);
 
+  useEffect(() => {
+    isApply.find(vacancie => {
+      if (vacancie.id !== cardId) {
+        return;
+      }
+      return setLink(vacancie.cdnUrl);
+    });
+  }, [cardId, isApply]);
+
   const publicTime = () => {
     const time = diffTime();
     const daysText =
@@ -157,14 +177,29 @@ const VacancieCard = ({ cardId, items }) => {
         <Container>
           <Public>{publicTime()}</Public>
           <ButtonsContainer>
-            {!apply && !checked && <BtnApply cardId={cardId} />}
+            {!apply && !checked && (
+              <BtnApply cardId={cardId} onChange={catchError} />
+            )}
             <div>
               <BtnFav cardId={cardId} />
               <BtnDislike cardId={cardId} />
+              {apply && (
+                <ApplyContainer>
+                  <SuccessApply href={link}>Отправлено резюме</SuccessApply>
+                </ApplyContainer>
+              )}
             </div>
           </ButtonsContainer>
         </Container>
       </Features>
+      {error && (
+        <ErrorContainer>
+          <ErrorIcon />
+          <ErrorMessage>
+            Ёлки-палки, этот файл просто огромный и не помещается в наш сервер
+          </ErrorMessage>
+        </ErrorContainer>
+      )}
     </Card>
   );
 };

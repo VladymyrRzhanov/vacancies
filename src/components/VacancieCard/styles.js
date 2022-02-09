@@ -19,7 +19,7 @@ export const Card = styled.div`
   border-radius: 5px;
   @media screen and (min-width: 1300px) {
     width: 750px;
-    min-height: 370px;
+    min-height: 340px;
   }
 `;
 
@@ -121,6 +121,7 @@ export const BenefitsList = styled.ul`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  overflow-x: auto;
 `;
 
 export const BenefitsItem = styled.li`
@@ -161,4 +162,36 @@ export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const ApplyContainer = styled.span`
+  display: inline-flex;
+  align-items: center;
+  margin-left: 50px;
+`;
+
+export const SuccessApply = styled.a`
+  position: absolute;
+  font-family: 'Main Text';
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  color: #212527;
+`;
+
+export const ErrorContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: #ffd8d8;
+  box-shadow: 0px 10px 10px rgba(5, 5, 6, 0.05);
+  border-radius: 0px 0px 5px 5px;
+`;
+
+export const ErrorMessage = styled.p`
+  margin-left: 10px;
+  font-family: 'Main Text';
+  font-size: 14px;
+  line-height: 1.43;
+  color: #212527;
 `;
